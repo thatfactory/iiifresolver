@@ -1,0 +1,10 @@
+{
+  "id": "https://id.rijksmuseum.nl/5010",
+  "type": "DigitalObject",
+  "access_point": [
+    {
+      "id": "https://iiif.micr.io/second/full/max/0/default.jpg",
+      "type": "DigitalObject"
+    }
+  ]
+}

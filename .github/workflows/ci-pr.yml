@@ -1,0 +1,62 @@
+name: Pull Request CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  swift-format:
+    name: Swift Format
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, macOS, ARM64]
+    env:
+      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v7
+      - name: Validate Consumer Integration
+        run: AgentGuidelines/Scripts/validate_consumer_setup.swift
+      - name: Strict Swift Format
+        run: AgentGuidelines/Scripts/swift_format.sh lint-strict Package.swift Sources Tests
+
+  validation:
+    name: Tests, Platforms, and DocC
+    runs-on: [self-hosted, macOS, ARM64]
+    needs: swift-format
+    env:
+      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v7
+      - name: Verify Toolchain
+        run: |
+          test "$(xcodebuild -version)" = "$(printf 'Xcode 27.2\nBuild version 27B52')"
+          swift --version
+      - name: Resolve Locked Dependencies
+        run: |
+          swift package resolve
+          git diff --exit-code -- Package.resolved
+      - name: Test
+        run: swift test
+      - name: Release Build
+        run: swift build -c release
+      - name: Compile Apple Platforms
+        run: |
+          set -euo pipefail
+          for platform in iOS tvOS watchOS visionOS; do
+            xcodebuild -scheme IIIFResolver -configuration Release \
+              -destination "generic/platform=$platform" \
+              -derivedDataPath .build/platforms build CODE_SIGNING_ALLOWED=NO
+          done
+      - name: Build DocC
+        run: |
+          swift package --allow-writing-to-directory .build/documentation generate-documentation \
+            --target IIIFResolver --disable-indexing --output-path .build/documentation \
+            --transform-for-static-hosting --hosting-base-path iiifresolver
+      - name: Check Tracked Files
+        run: git diff --exit-code

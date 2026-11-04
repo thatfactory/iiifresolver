@@ -1,0 +1,36 @@
+{
+  "id": "https://id.rijksmuseum.nl/2029",
+  "type": "VisualItem",
+  "digitally_shown_by": [
+    {
+      "id": "https://id.rijksmuseum.nl/5008",
+      "type": "DigitalObject"
+    },
+    {
+      "id": "https://id.rijksmuseum.nl/5010",
+      "type": "DigitalObject"
+    }
+  ],
+  "subject_to": [
+    {
+      "classified_as": [
+        {
+          "id": "https://creativecommons.org/publicdomain/mark/1.0/",
+          "type": "Type"
+        }
+      ],
+      "identified_by": [
+        {
+          "type": "Name",
+          "content": "Public Domain",
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

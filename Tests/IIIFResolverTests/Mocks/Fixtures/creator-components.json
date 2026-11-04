@@ -1,0 +1,53 @@
+{
+  "id": "https://id.rijksmuseum.nl/2001",
+  "type": "HumanMadeObject",
+  "produced_by": {
+    "type": "Production",
+    "referred_to_by": [
+      {
+        "type": "LinguisticObject",
+        "content": "An unrelated production summary",
+        "classified_as": [{ "id": "http://vocab.getty.edu/aat/300435417", "type": "Type" }]
+      },
+      { "type": "LinguisticObject", "content": "An unclassified production note" }
+    ],
+    "part": [
+      {
+        "type": "Production",
+        "carried_out_by": [
+          {
+            "id": "https://id.rijksmuseum.nl/2101",
+            "type": "Person",
+            "notation": [
+              { "@language": "en", "@value": "Artist One" },
+              { "@language": "nl", "@value": "Kunstenaar Eén" }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Production",
+        "carried_out_by": [
+          {
+            "id": "https://id.rijksmuseum.nl/2102",
+            "type": "Person",
+            "notation": [{ "@language": "en", "@value": "Artist Two" }]
+          }
+        ],
+        "referred_to_by": [
+          {
+            "type": "LinguisticObject",
+            "content": "Attributed to Artist Two",
+            "classified_as": [{ "id": "http://vocab.getty.edu/aat/300435416", "type": "Type" }],
+            "language": [{ "id": "http://vocab.getty.edu/aat/300388277", "type": "Language" }]
+          },
+          {
+            "type": "LinguisticObject",
+            "content": "An unrelated component summary",
+            "classified_as": [{ "id": "http://vocab.getty.edu/aat/300435417", "type": "Type" }]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "https://id.rijksmuseum.nl/5008",
+  "type": "DigitalObject",
+  "access_point": [
+    {
+      "id": "https://iiif.micr.io/sample/full/max/0/default.jpg",
+      "type": "DigitalObject"
+    },
+    {
+      "id": "https://iiif.micr.io/sample/full/max/0/default.jpg",
+      "type": "DigitalObject"
+    }
+  ]
+}

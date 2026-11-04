@@ -1,0 +1,164 @@
+{
+  "id": "https://id.rijksmuseum.nl/2001",
+  "type": "HumanMadeObject",
+  "identified_by": [
+    {
+      "type": "Name",
+      "content": "A drawing",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388277",
+          "type": "Language"
+        }
+      ]
+    },
+    {
+      "type": "Name",
+      "content": "Een tekening",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388256",
+          "type": "Language"
+        }
+      ]
+    },
+    {
+      "type": "Identifier",
+      "content": "SK-A-1",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388277",
+          "type": "Language"
+        }
+      ]
+    }
+  ],
+  "produced_by": {
+    "referred_to_by": [
+      {
+        "type": "LinguisticObject",
+        "content": "Attributed to Artist",
+        "language": [
+          {
+            "id": "http://vocab.getty.edu/aat/300388277",
+            "type": "Language"
+          }
+        ],
+        "classified_as": [
+          {
+            "id": "http://vocab.getty.edu/aat/300435416",
+            "type": "Type"
+          }
+        ]
+      }
+    ],
+    "timespan": {
+      "identified_by": [
+        {
+          "type": "Name",
+          "content": "circa 1884",
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        }
+      ]
+    },
+    "technique": [
+      {
+        "notation": [
+          {
+            "@value": "pencil",
+            "@language": "en"
+          }
+        ]
+      }
+    ]
+  },
+  "made_of": [
+    {
+      "notation": [
+        {
+          "@value": "paper",
+          "@language": "en"
+        },
+        {
+          "@value": "papier",
+          "@language": "nl"
+        }
+      ]
+    }
+  ],
+  "referred_to_by": [
+    {
+      "type": "LinguisticObject",
+      "content": "A landscape.",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388277",
+          "type": "Language"
+        }
+      ],
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300435452",
+          "type": "Type"
+        }
+      ]
+    },
+    {
+      "type": "LinguisticObject",
+      "content": "Gift of a donor",
+      "language": [
+        {
+          "id": "http://vocab.getty.edu/aat/300388277",
+          "type": "Language"
+        }
+      ],
+      "classified_as": [
+        {
+          "id": "http://vocab.getty.edu/aat/300026687",
+          "type": "Type"
+        }
+      ]
+    }
+  ],
+  "shows": [
+    {
+      "id": "https://id.rijksmuseum.nl/2029",
+      "type": "VisualItem"
+    },
+    {
+      "id": "https://id.rijksmuseum.nl/2029",
+      "type": "VisualItem"
+    }
+  ],
+  "subject_of": [
+    {
+      "digitally_carried_by": [
+        {
+          "format": "text/html",
+          "access_point": [
+            {
+              "id": "https://www.rijksmuseum.nl/en/collection/example",
+              "type": "DigitalObject"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "subject_to": [
+        {
+          "classified_as": [
+            {
+              "id": "https://creativecommons.org/publicdomain/zero/1.0/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

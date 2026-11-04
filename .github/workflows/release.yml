@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-documentation
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    uses: ./.github/workflows/ci.yml
+
+  documentation:
+    name: Publish DocC
+    needs: validate
+    runs-on: [self-hosted, macOS, ARM64]
+    env:
+      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v7
+      - name: Generate DocC
+        run: |
+          swift package --allow-writing-to-directory .build/documentation generate-documentation \
+            --target IIIFResolver --disable-indexing --output-path .build/documentation \
+            --transform-for-static-hosting --hosting-base-path iiifresolver
+          cp Documentation/index.html .build/documentation/index.html
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .build/documentation
+
+  deploy:
+    needs: documentation
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy DocC
+        id: deployment
+        uses: actions/deploy-pages@v5
