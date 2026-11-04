@@ -1,0 +1,10 @@
+{
+  "@context": "http://iiif.io/api/image/3/context.json",
+  "id": "https://iiif.micr.io/sample",
+  "type": "ImageService3",
+  "protocol": "http://iiif.io/api/image",
+  "profile": "level2",
+  "width": 5686,
+  "height": 4134,
+  "maxArea": 17550000
+}
