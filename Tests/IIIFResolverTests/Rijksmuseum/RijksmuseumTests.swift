@@ -86,6 +86,59 @@ struct RijksmuseumTests {
         #expect(artwork.creatorAttributions.isEmpty)
     }
 
+    @Test func componentCreatorsPreserveNamesLanguagesAndQualifiedStatements() async throws {
+        // Given
+        let transport = MockTransport { _ in
+            (try TestFiles.fixture("creator-components"), HTTPResponse(status: .ok))
+        }
+
+        // When
+        let artwork = try await RijksmuseumClient(transport: transport).artwork(for: reference())
+
+        // Then
+        #expect(
+            artwork.creatorAttributions.map(\.value) == ["Artist One", "Kunstenaar Eén", "Attributed to Artist Two"])
+        #expect(
+            artwork.creatorAttributions.map { $0.languageIdentifier?.absoluteString } == [
+                "urn:ietf:bcp:47:en", "urn:ietf:bcp:47:nl", "http://vocab.getty.edu/aat/300388277",
+            ])
+    }
+
+    @Test(arguments: [false, true])
+    func creatorNotationsAreResolvedAtRootAndNestedActivities(nested: Bool) async throws {
+        // Given
+        var object = try #require(
+            JSONSerialization.jsonObject(with: TestFiles.fixture("creator-components")) as? [String: Any])
+        let production = try #require(object["produced_by"] as? [String: Any])
+        let firstPart = try #require((production["part"] as? [[String: Any]])?.first)
+        object["produced_by"] = nested ? ["part": [["part": [firstPart]]]] : firstPart
+        let data = try JSONSerialization.data(withJSONObject: object)
+        let transport = MockTransport { _ in (data, HTTPResponse(status: .ok)) }
+
+        // When
+        let artwork = try await RijksmuseumClient(transport: transport).artwork(for: reference())
+
+        // Then
+        #expect(artwork.creatorAttributions.map(\.value) == ["Artist One", "Kunstenaar Eén"])
+    }
+
+    @Test func unrelatedProductionNotesDoNotBecomeCreators() async throws {
+        // Given
+        var object = try #require(
+            JSONSerialization.jsonObject(with: TestFiles.fixture("creator-components")) as? [String: Any])
+        var production = try #require(object["produced_by"] as? [String: Any])
+        production.removeValue(forKey: "part")
+        object["produced_by"] = production
+        let data = try JSONSerialization.data(withJSONObject: object)
+        let transport = MockTransport { _ in (data, HTTPResponse(status: .ok)) }
+
+        // When
+        let artwork = try await RijksmuseumClient(transport: transport).artwork(for: reference())
+
+        // Then
+        #expect(artwork.creatorAttributions.isEmpty)
+    }
+
     @Test func linkedFailureDoesNotSilentlyOmitImages() async throws {
         let transport = MockTransport { request in
             if request.path?.hasPrefix("/2029") == true { return (Data(), HTTPResponse(status: .serviceUnavailable)) }

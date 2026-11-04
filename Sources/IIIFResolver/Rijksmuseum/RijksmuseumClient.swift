@@ -48,14 +48,10 @@ public struct RijksmuseumClient: Sendable {
             let record = try await entity(reference.id, expectedType: "HumanMadeObject")
             let images = try await images(for: record)
             let production = record.producedBy
-            let attributions = (production?.referredToBy ?? []).flatMap(\.values)
-            let componentAttributions = (production?.part ?? []).flatMap {
-                ($0.referredToBy ?? []).filter { $0.classified(as: "300435417") }.flatMap(\.values)
-            }
             return Artwork(
                 reference: ArtworkReference(id: record.id),
                 titles: unique((record.identifiedBy ?? []).filter { $0.type == "Name" }.flatMap(\.values)),
-                creatorAttributions: unique(attributions.isEmpty ? componentAttributions : attributions),
+                creatorAttributions: unique(production?.creatorAttributions ?? []),
                 dates: unique((production?.timespan?.identifiedBy ?? []).flatMap(\.values)),
                 descriptions: unique(
                     (record.referredToBy ?? []).filter {

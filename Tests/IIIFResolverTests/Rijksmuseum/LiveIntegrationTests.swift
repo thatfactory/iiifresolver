@@ -13,6 +13,7 @@ struct LiveIntegrationTests {
         let reference = try #require(page.artworks.first)
         let artwork = try await museum.artwork(for: reference)
         #expect(!artwork.titles.isEmpty)
+        #expect(!artwork.creatorAttributions.isEmpty)
         let image = try #require(artwork.images.first)
         let client = IIIFImageClient()
         let service = try await client.resolve(image.serviceURL)

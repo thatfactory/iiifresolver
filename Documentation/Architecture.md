@@ -30,6 +30,8 @@ Search -> artwork references + continuation
 
 The provider follows exact returned identifiers, requests `_profile=la-framed`, and validates record identity/type. Artwork, visual, and digital identifiers are distinct. Multiple images remain selectable; duplicate services merge their rights in original order. Optional educational fields require no extra person/vocabulary fetches. Display attributions and qualifiers are preserved.
 
+Creator attribution prefers Rijksmuseum's descriptive production statements classified as `300435416`, which include its display qualifiers. When an activity has no such statement, it uses localized `carried_out_by[].notation` names and visits component `part` activities recursively. Other production notes, including abstract notes classified as `300435417`, are not interpreted as creators. This is a Rijksmuseum mapping, not a generic inference about every Linked Art production description. The [provider search tutorial](https://data.rijksmuseum.nl/tutorials/search/) documents actor notations; current framed records also supply qualified display statements.
+
 The Rijksmuseum adapter accepts its numeric persistent identifiers and documented search continuation URLs. It derives Micrio service URLs from the known whole-image access-point shape. The reusable IIIF client accepts arbitrary HTTPS Image API 3 service/information URLs and does not depend on a museum hostname. Unknown JSON fields are ignored; incompatible representations produce typed failures. Failed linked requests abort the detail operation instead of silently omitting images. Empty image arrays are valid.
 
 ## Images and files

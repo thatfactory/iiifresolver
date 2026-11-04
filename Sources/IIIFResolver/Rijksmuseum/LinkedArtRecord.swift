@@ -42,7 +42,7 @@ struct LinkedArtRecord: Decodable, Sendable {
         }
     }
 
-    /// A localized term in the provider's compact notation format.
+    /// A localized actor or vocabulary term in the provider's compact notation format.
     struct Term: Decodable, Sendable {
         var notation: [Notation]?
 
@@ -73,10 +73,18 @@ struct LinkedArtRecord: Decodable, Sendable {
 
     /// Production metadata, with optional component activities and display dates.
     struct Production: Decodable, Sendable {
+        var carriedOutBy: [Term]?
         var referredToBy: [Text]?
         var timespan: Timespan?
         var technique: [Term]?
         var part: [Production]?
+
+        /// Prefers Rijksmuseum's qualified display statements, falling back to named actors.
+        var creatorAttributions: [ArtworkText] {
+            let statements = (referredToBy ?? []).filter { $0.classified(as: "300435416") }.flatMap(\.values)
+            guard statements.isEmpty else { return statements }
+            return (carriedOutBy ?? []).flatMap(\.values) + (part ?? []).flatMap(\.creatorAttributions)
+        }
     }
 
     /// Human-readable dating; precision and qualification remain as supplied.

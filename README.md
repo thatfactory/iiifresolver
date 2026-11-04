@@ -53,7 +53,7 @@ func downloadFirstArtwork(to destination: URL) async throws {
 
 Search returns one provider-sized page of references. Use `museum.nextPage(after: page)` for the next page; nil means the collection has ended. Empty filters are omitted and `imageAvailable` defaults to true. Filters include creators, title, description, object type, materials, techniques, creation date, and object number. Rijksmuseum does not require an API key.
 
-Artwork details include available titles, artist attribution, display dates, descriptions, materials, techniques, catalogue links, and image representations. Text retains language vocabulary identifiers; compact vocabulary language tags become `urn:ietf:bcp:47:<tag>`. Attribution qualifiers are preserved. Missing optional metadata stays absent. Image rights are separate from catalogue metadata licensing.
+Artwork details include available titles, artist attribution, display dates, descriptions, materials, techniques, catalogue links, and image representations. Text retains language vocabulary identifiers; compact vocabulary language tags become `urn:ietf:bcp:47:<tag>`. Museum display statements preserve attribution qualifiers; when absent, named production actors supply the attribution. Unrelated production notes are excluded. Missing optional metadata stays absent. Image rights are separate from catalogue metadata licensing.
 
 Use `request.url` for previews or `.maximum` for the maximum **permitted by the service**, which may be below the original resolution. Bounded requests preserve aspect ratio and respect advertised capabilities, dimensions, and pixel-area limits. Static level-zero services use their listed sizes and reject bounds for which none fit.
 
