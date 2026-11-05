@@ -5,8 +5,6 @@
   <a href="https://developer.apple.com/documentation/xcode/swift-packages"><img alt="SPM" src="https://img.shields.io/badge/SPM-ready-b68f6a.svg?logo=gitlfs&logoColor=white"></a>
   <a href="https://thatfactory.github.io/iiifresolver/documentation/iiifresolver/"><img alt="DocC" src="https://img.shields.io/badge/DocC-documentation-0288D1.svg?logo=bookstack&logoColor=white"></a>
   <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/License-MIT-67ac5b.svg?logo=googledocs&logoColor=white"></a>
-  <a href="https://github.com/thatfactory/iiifresolver/commits/main/"><img alt="Updated" src="https://img.shields.io/github/last-commit/thatfactory/iiifresolver?label=Updated&logo=convertio&logoColor=white"></a>
-  <a href="https://github.com/thatfactory/iiifresolver/releases"><img alt="Revision" src="https://img.shields.io/github/v/release/thatfactory/iiifresolver?label=Revision&logo=gitbook&logoColor=white"></a>
   <a href="https://github.com/thatfactory/iiifresolver/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/thatfactory/iiifresolver/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://github.com/thatfactory/iiifresolver/actions/workflows/release.yml"><img alt="Release" src="https://github.com/thatfactory/iiifresolver/actions/workflows/release.yml/badge.svg"></a>
 </p>
