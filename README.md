@@ -17,7 +17,7 @@ Rijksmuseum is the first discovery provider. The independent IIIF Image API 3 cl
 
 ## Requirements and integration
 
-Xcode 27.2 (27B52), Swift 6.4.2, and iOS, macOS, tvOS, watchOS, or visionOS 26+. The manifest uses Swift tools 6.4 and Swift 6 language mode.
+Use an active Xcode/Swift toolchain supporting Swift tools 6.4, Swift 6 language mode, and iOS, macOS, tvOS, watchOS, or visionOS 26+. CI uses the runner's selected installation and validates compatibility through builds and tests. The toolchain badges record the last validated baseline: Xcode 27.2 (27B52) and Swift 6.4.2.
 
 ```swift
 .package(url: "https://github.com/thatfactory/iiifresolver.git", from: "0.1.0")

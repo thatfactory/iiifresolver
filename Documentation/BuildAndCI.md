@@ -1,11 +1,15 @@
 # Build and CI
 
-Use Xcode 27.2 (27B52), Swift 6.4.2, Swift tools 6.4, and Swift 6 language mode. Every library/test target uses the shared warnings-as-errors and upcoming-feature baseline. Swift 6 owns complete concurrency checking; the package does not impose MainActor isolation.
+Use the active Xcode/Swift toolchain with Swift tools 6.4 and Swift 6 language mode. Every library/test target uses the shared warnings-as-errors and upcoming-feature baseline. Swift 6 owns complete concurrency checking; the package does not impose MainActor isolation.
+
+CI follows the shared [runner toolchain policy](../AgentGuidelines/Guidelines/CICD.md#runner-toolchain): respect inherited `DEVELOPER_DIR` or the configured Xcode selection, report the actual toolchain, and let builds and tests establish compatibility. No exact toolchain exception applies. The last validated baseline is Xcode 27.2 (27B52) and Swift 6.4.2.
 
 ## Local validation
 
 ```sh
-export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+echo "Developer directory: ${DEVELOPER_DIR:-$(xcode-select -p)}"
+xcodebuild -version
+xcrun swiftc --version
 AgentGuidelines/Scripts/swift_format.sh format-and-lint Package.swift Sources Tests
 AgentGuidelines/Scripts/validate_consumer_setup.swift
 swift package resolve
@@ -43,7 +47,7 @@ The opt-in test searches for Van Gogh drawings, resolves the first artwork and i
 
 ## Runner labels:
 
-Apple jobs use `[self-hosted, macOS, ARM64]` with Xcode 27.2 at `/Applications/Xcode.app` and iOS/tvOS/watchOS/visionOS SDKs installed. Tests run on macOS; other platforms receive Release compile checks. Generic Pages deployment uses `ubuntu-latest`. Do not change global Xcode selection or clear shared caches.
+Apple jobs use `[self-hosted, macOS, ARM64]` with an active Xcode installation and the required iOS/tvOS/watchOS/visionOS SDKs installed. Tests run on macOS; other platforms receive Release compile checks. Generic Pages deployment uses `ubuntu-latest`. Do not change global Xcode selection or clear shared caches.
 
 PR/main workflows run the same validation steps: consumer integration, strict nonmutating lint, locked resolution, deterministic tests, Release build, all-platform compilation, and DocC. Draft PRs run validation. Fork code is skipped on the persistent self-hosted runner; maintainers must review it and arrange isolated validation before accepting external contributions.
 

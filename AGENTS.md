@@ -88,7 +88,7 @@ For consumer pull requests, do not substantively review `AgentGuidelines/**` aft
 
 ## Stack
 
-Xcode 27.2 (27B52), Swift 6.4.2, Swift tools 6.4, Swift 6 language mode. Support iOS, macOS, tvOS, watchOS, and visionOS 26+. Use `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer` without changing global selection.
+Use the active Xcode/Swift toolchain with Swift tools 6.4 and Swift 6 language mode. Support iOS, macOS, tvOS, watchOS, and visionOS 26+. Respect inherited `DEVELOPER_DIR` or the configured Xcode selection; do not change global selection. See [Build and CI](Documentation/BuildAndCI.md) for validation and the tested baseline.
 
 ## Local specialization
 
