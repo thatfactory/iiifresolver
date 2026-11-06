@@ -53,6 +53,6 @@ PR/main workflows run the same validation steps: consumer integration, strict no
 
 ## Release
 
-Run `agent-guidelines-audit` before preparing the release PR. Obtain Reasoning Relay approval for the exact current base/head and green required checks before squash merge. Source changes invalidate head approval. Do not request manual Codex reviews without owner instruction.
+Run `agent-guidelines-audit` before preparing the release PR. Open the validated release PR ready for its initial automatic Codex P0/P1 review. Record the actual reviewed head, locally verify any remediation-only delta, and require green current-head checks before an authorized squash merge. Do not request manual reviews without owner instruction.
 
 After merge, publish matching semantic-version tag and GitHub release. The release workflow repeats validation, generates DocC with the `iiifresolver` hosting base, copies the root redirect, uploads, and deploys GitHub Pages. Documentation publishing never precedes the reviewed release. Register the package and canonical 🔎 emoji in the Swift Package Collection, then verify clean remote resolution and documentation availability.
